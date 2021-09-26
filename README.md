@@ -81,7 +81,7 @@ to combine features from the previous decoder block and reverse attention (RA) m
     
     3. Change the --train_path & --test_path in Train.py  
     
-    4. Separate into train, test and validation
+    4.  Divide your dataset into train, validation and test sets. 
     
     5.  Make sure that the folder inside train, validation and test have subfolders "image","mask" and "edge_mask"
     
@@ -90,23 +90,12 @@ to combine features from the previous decoder block and reverse attention (RA) m
 Shell script example to train your model. 
 python Train.py --ckpt_folder nora_polyp_512_1 --trainsize 512 --batchsize 4  --train_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/train --val_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/validate/ --model DRPAEdgeNet
 
-
 - Testing & inference result :
 
     1. Change the data_path, model_path, save_path in Test.py. data_path is the path to your test dataset. model_path is the path to the model chekpoint, save_path is the path to store the predictions of the model. 
     
    
-    
-
-### Evaluation :
-
-1. Change the image_root, gt_root in line 49, 50 in eval_Kvasir.py  
-2. Run the eval_Kvasir.py to get a similar result (about +0.002) to our report for Kvasir Dataset.  
-
-Another one is written in MATLAB code ([link](https://drive.google.com/file/d/1_h4_CjD5GKEf7B1MRuzye97H0MXf2GE9/view?usp=sharing)).
-You can see how to run it in https://github.com/DengPingFan/PraNet#32-evaluating-your-trained-model-
-And our report is using this code to evaluate.
-
+   
 ### 3. Acknowledgement
 
 - Part of the code is borrowed from     
