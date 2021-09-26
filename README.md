@@ -25,10 +25,10 @@ to combine features from the previous decoder block and reverse attention (RA) m
 
 ###  Sample Inference Results on Kvasir-SEG Dataset of DPRA-EdgeNet against PraNet and EdgeNet(DPRA-EdgeNet without Dual Parallel Reverse Attention)
 
-<p align="center"> <img src='inf.png' align="center" height="600px"> </p>
+<p align="center"> <img src='images/Comparison.png' align="center" height="600px"> </p>
 
-## HarDNet-MSEG Architecture
-<p align="center"> <img src='images/edge seg map.png' align="center" height="400px"> </p> 
+## DPRA-EdgeNet Architecture
+<p align="center"> <img src='images/Network_Arch_2.png' align="center" height="400px"> </p> 
 
 - A Simple Encoder-Decoder architecture
 
