@@ -3,7 +3,7 @@ We propose Dual Parallel Reverse Attention Edge Network(DPRA-EdgeNet), an archit
 to combine features from the previous decoder block and reverse attention (RA) module to enhance the feature representation learnt by the model. We compare our model against popular segmentation models such as UNet, SegNet and PraNet and demonstrate through a five fold cross validation experiment that our model improves the segmentation accuracy significantly on the Kvasir-SEG dataset. 
 
 
-## HarDNet Family
+## HarDNet Architectures
 #### For Image Classification : [HarDNet](https://github.com/PingoLH/Pytorch-HarDNet) A Low Memory Traffic Network
 #### For Object Detection : [CenterNet-HarDNet](https://github.com/PingoLH/CenterNet-HarDNet) 44.3 mAP / 45 fps on COCO Dataset
 #### For Semantic Segmentation : [FC-HarDNet](https://github.com/PingoLH/FCHarDNet)  76.0 mIoU / 53 fps on Cityscapes Dataset
@@ -30,9 +30,10 @@ to combine features from the previous decoder block and reverse attention (RA) m
 ## DPRA-EdgeNet Architecture
 <p align="center"> <img src='images/Network_Arch_2.png' align="center" height="400px"> </p> 
 
-- A Simple Encoder-Decoder architecture
+- Please download this image to view it properly.
 
-- Encoder Part : Using HarDNet68 as backbone
+- Encoder : HarDNet68 as backbone
+- Using PraNet's Reverse Attention Block
 
 <p align="center"> <img src='blk.png' align="center" height="100px"> </p> 
 
@@ -43,7 +44,7 @@ to combine features from the previous decoder block and reverse attention (RA) m
     + No global dense connection (input of a HarDBlk is NOT reused as a part of output)
 ```
 
-- Decoder Part : Adopted from [Cascaded Partial Decoder](https://github.com/wuzhe71/CPD)
+- Decoder Part : Inspired by [Cascaded Partial Decoder](https://github.com/wuzhe71/CPD)
 
 ```
     + Using RFB Block for increasing the receptive field and strengthening the features.
