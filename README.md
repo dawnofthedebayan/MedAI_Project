@@ -35,7 +35,7 @@ to combine features from the previous decoder block and reverse attention (RA) m
 - Encoder : HarDNet68 as backbone
 - Using PraNet's Reverse Attention Block
 
-<p align="center"> <img src='blk.png' align="center" height="100px"> </p> 
+<p align="center"> <img src='images/hardnet.png' align="center" height="100px"> </p> 
 
 ```
     + k = growth rate (as in DenseNet)
