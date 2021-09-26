@@ -1,0 +1,2 @@
+
+python Train.py --ckpt_folder nora_instrument_0_512 --trainsize 512 --batchsize 4  --train_path /home/debayan/Desktop/MedAI_Project/new_data/nora_instruments_new/0/train --val_path /home/debayan/Desktop/MedAI_Project/new_data/nora_instruments_new/0/validate/ --model DRPAEdgeNet

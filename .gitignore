@@ -1,0 +1,12 @@
+/__pycache__
+/eval
+/ground_truth
+/new_data
+/old_predictions
+/predictions
+/results
+/results_computed_of_prediction
+/saved_models
+/training_scripts
+/visualise_attention.py
+/wandb
