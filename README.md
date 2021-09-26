@@ -81,11 +81,13 @@ to combine features from the previous decoder block and reverse attention (RA) m
     
     3. Change the --train_path & --test_path in Train.py  
     
-    4.  Divide your dataset into train, validation and test sets. 
+    4.  Divide your dataset into train, validation and test sets using make_train_val_k_fold_crossvd.py. 
+
+    5.  Augment data using data_augmentation_nora.py
     
-    5.  Make sure that the folder inside train, validation and test have subfolders "image","mask" and "edge_mask"
+    6.  Make sure that the folder inside train, validation and test have subfolders "image","mask" and "edge_mask"
     
-    6.  You can create edge maps using create_edge_mask.py script.
+    7.  You can create edge maps using create_edge_mask.py script.
 
 Shell script example to train your model. 
 ```
@@ -96,8 +98,11 @@ python Train.py --ckpt_folder nora_polyp_512_1 --trainsize 512 --batchsize 4  --
 
     1. Change the data_path, model_path, save_path in Test.py. data_path is the path to your test dataset. model_path is the path to the model chekpoint, save_path is the path to store the predictions of the model. 
     
-   
-   
+- Evaluate models :
+
+    1. Use calculate_metrics.py to calculate the IoU, DSC, Precision and Recall for individual models.
+    2. Use calculate_consolidated_metrics.py to calculate the average metrics incase you have K-Fold-Cross VD strategy. 
+     
 ### 3. Acknowledgement
 
 - Part of the code is borrowed from     

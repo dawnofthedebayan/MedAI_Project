@@ -53,9 +53,6 @@ for dataset in datasets:
     
     #for i in range(cross_vd): 
 
-        
-
-
     kf.get_n_splits(train_val_images)    
     i = 0
     for train_index, test_index in kf.split(train_val_images):
