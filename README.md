@@ -63,25 +63,15 @@ to combine features from the previous decoder block and reverse attention (RA) m
 
 - Downloading necessary data:
 
+
     **For Kvasir-SEG Dataset reference from**
     [**Real-Time Polyp Detection, Localisation and Segmentation in Colonoscopy Using Deep Learning**](https://arxiv.org/abs/2011.07631)
-    **(Only training using Kvasir-SEG, 880 images for training 120 images for testing)**
     
-     + downloading testing dataset and move it into your test_path
-    which can be found in this [download link (Google Drive)](https://drive.google.com/file/d/1us5iOMWVh_4LAiACM-LQa73t1pLLPJ7l/view?usp=sharing).
-    
-    + downloading training dataset and move it into your train_path
-    which can be found in this [download link (Google Drive)](https://drive.google.com/file/d/17sUo2dLcwgPdO_fD4ySiS_4BVzc3wvwA/view?usp=sharing).
    
-    
-    **For each Dataset training including Kvasir-SEG, CVC-ColonDB, EndoScene, ETIS-Larib Polyp DB and CVC-Clinic DB from**
-    [**PraNet: Parallel Reverse Attention Network for Polyp Segmentation**](https://arxiv.org/abs/2006.11392)
-    
-    + downloading testing dataset and move it into your test_path
-    which can be found in this [download link (Google Drive)](https://drive.google.com/file/d/1o8OfBvYE6K-EpDyvzsmMPndnUMwb540R/view?usp=sharing).
-    
-    + downloading training dataset and move it into your train_path
-    which can be found in this [download link (Google Drive)](https://drive.google.com/file/d/1lODorfB33jbd-im-qrtUgWnZXxB94F55/view?usp=sharing).
+    + Kvasir-SEG dataset and move it into your train_path
+    which can be found [here](https://datasets.simula.no/kvasir-seg/).
+    + Kvasir-Instruments dataset and move it into your train_path
+    which can be found [here](https://datasets.simula.no/kvasir-instrument/).
    
 - Training :
 
@@ -91,17 +81,21 @@ to combine features from the previous decoder block and reverse attention (RA) m
     
     3. Change the --train_path & --test_path in Train.py  
     
-    4. Final step is to run the Train.py  
+    4. Separate into train, test and validation
+    
+    5.  Make sure that the folder inside train, validation and test have subfolders "image","mask" and "edge_mask"
+    
+    6.  You can create edge maps using create_edge_mask.py script.
+
+Shell script example to train your model. 
+python Train.py --ckpt_folder nora_polyp_512_1 --trainsize 512 --batchsize 4  --train_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/train --val_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/validate/ --model DRPAEdgeNet
+
 
 - Testing & inference result :
 
-    1. Change the data_path in Test.py (line 16) 
+    1. Change the data_path, model_path, save_path in Test.py. data_path is the path to your test dataset. model_path is the path to the model chekpoint, save_path is the path to store the predictions of the model. 
     
-    2. Here is the weight we trained for Kvasir-SEG using on the report https://drive.google.com/file/d/1nj-zv64RiWwYjCmWg4NME7HNf_nBncUu/view?usp=sharing   
-    
-       Download it, and run "python Test.py --pth_path "path of the weight"    
-    
-       And you can get the inference results in results/
+   
     
 
 ### Evaluation :
@@ -115,34 +109,15 @@ And our report is using this code to evaluate.
 
 ### 3. Acknowledgement
 
-- A large part of the code is borrowed from     
-**PraNet** (https://github.com/DengPingFan/PraNet) (https://arxiv.org/abs/2006.11392)        
-**Cascaded Partial Decoder** (https://github.com/wuzhe71/CPD) (https://arxiv.org/abs/1904.08739)    
-Thanks for their wonderful works.  
+- Part of the code is borrowed from     
+**PraNet** (https://github.com/DengPingFan/PraNet) (https://arxiv.org/abs/2006.11392)     
+**HarDNet-MSEG** (https://github.com/james128333/HarDNet-MSEG) (https:https://arxiv.org/abs/2101.07172)        
+**DDANet** (https://github.com/nikhilroxtomar/DDANet) (https://arxiv.org/abs/2012.15245)    
 
-- This research is supported in part by a grant from the **Ministry of Science and Technology (MOST) of Taiwan**.   
-We thank **National Center for High-performance Computing (NCHC)** for providing computational and storage resources.        
-We would also like to thank **[Mr.Ping Chao](https://github.com/PingoLH)** for many fruitful discussions.
+I deeply appreciate their work! It would have taken me lot more time otherwise! Thank you!
 
 
 
 ## Citation
 If you find this project useful for your research, please use the following BibTeX entry.
-
-      @misc{huang2021hardnetmseg,
-      title={HarDNet-MSEG: A Simple Encoder-Decoder Polyp Segmentation Neural Network that Achieves over 0.9 Mean Dice and 86 FPS}, 
-      author={Chien-Hsiang Huang and Hung-Yu Wu and Youn-Long Lin},
-      year={2021},
-      eprint={2101.07172},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-      } 
-      
-      @inproceedings{chao2019hardnet,
-      title={Hardnet: A low memory traffic network},
-      author={Chao, Ping and Kao, Chao-Yang and Ruan, Yu-Shan and Huang, Chien-Hsiang and Lin, Youn-Long},
-      booktitle={Proceedings of the IEEE International Conference on Computer Vision},
-      pages={3552--3561},
-      year={2019}
-      }
-      
+    TBA
