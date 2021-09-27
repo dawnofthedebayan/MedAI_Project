@@ -74,17 +74,17 @@ to combine features from the previous decoder block and reverse attention (RA) m
    
 - Training :
 
-    1. First download pretrain_weight : hardnet68.pth for HarDNet68 in https://github.com/PingoLH/Pytorch-HarDNet  
+    1. Download pretrain_weight : hardnet68.pth for HarDNet68 in https://github.com/PingoLH/Pytorch-HarDNet  
     
     2. Change the weight path in lib/hardnet_68.py line 203 for loading the pretrain_weight  
     
-    3. Change the --train_path & --test_path in Train.py  
-    
+    3.  Change the --train_path & --test_path in Train.py. Other configurable parameters are learning rate, epoch, optimizer, batchsize, patience for scheduler and early stopping. feature_channels is only for DPRA-EdgeNet. 
+           
     4.  Divide your dataset into train, validation and test sets using make_train_val_k_fold_crossvd.py. 
 
     5.  Augment data using data_augmentation_nora.py
     
-    6.  Make sure that the folder inside train, validation and test have subfolders "image","mask" and "edge_mask"
+    6.  Make sure that the folder inside train, validation and test have subfolders "image","mask" and "edge_mask" individually.
     
     7.  You can create edge maps using create_edge_mask.py script.
 
