@@ -10,7 +10,6 @@ to combine features from the previous decoder block and reverse attention (RA) m
 
 
 ## Main results
-<p align="center"> <img src='lands.png' align="center" height="400px"> </p>
 
 ### Performance on Kvasir-SEG Dataset  
 
