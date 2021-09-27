@@ -91,7 +91,7 @@ to combine features from the previous decoder block and reverse attention (RA) m
 
 Shell script example to train your model. 
 ```
-python Train.py --ckpt_folder nora_polyp_512_1 --trainsize 512 --batchsize 4  --train_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/train --val_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/validate/ --model DRPAEdgeNet
+python Train.py --ckpt_folder nora_polyp_512_1 --trainsize 512 --batchsize 4  --train_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/train --val_path /home/debayan/Desktop/MedAI_Project/new_data/nora_polyp_new/0/validate/ --model DPRAEdgeNet
 ```
 
 - Testing & inference result :

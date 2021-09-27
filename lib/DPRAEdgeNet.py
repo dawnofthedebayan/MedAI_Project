@@ -436,10 +436,10 @@ class EdgeNet(nn.Module):
 
 
 
-class DRPAEdgeNet(nn.Module):
+class DPRAEdgeNet(nn.Module):
     # res2net based encoder decoder
     def __init__(self, channel=32):
-        super(DRPAEdgeNet, self).__init__()
+        super(DPRAEdgeNet, self).__init__()
         # ---- ResNet Backbone ----
         #self.resnet = res2net50_v1b_26w_4s(pretrained=True)
         self.relu = nn.ReLU(True)
@@ -501,6 +501,7 @@ class DRPAEdgeNet(nn.Module):
 
    
         self.upsample = nn.ConvTranspose2d(channel//8, 1, kernel_size=4, stride=2, padding=1)
+        self.final_conv = BasicConv2d(channel//8, 1, kernel_size=1, padding=0)
 
         self.b_upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
         self.b_upsample_4x = nn.Upsample(scale_factor=4, mode='bilinear', align_corners=True)
@@ -681,6 +682,8 @@ class DRPAEdgeNet(nn.Module):
 
         seg_map = self.b_upsample(self.upsample(main_dec_3))
         edge_map = self.b_upsample(self.upsample(edge_dec_3))
+        #seg_map = self.b_upsample(self.b_upsample(self.final_conv(main_dec_3)))
+        #edge_map = self.b_upsample(self.b_upsample(self.final_conv(edge_dec_3)))
 
         
         return [seg_map,crude_seg_map,dec_lateral_seg_map_1,dec_lateral_seg_map_2,dec_lateral_seg_map_3,lateral_seg_map_1,lateral_seg_map_2,lateral_seg_map_3,lateral_seg_map_4],\

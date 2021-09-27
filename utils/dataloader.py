@@ -66,7 +66,7 @@ class PolypDataset(data.Dataset):
         random.seed(seed) # apply this seed to img tranfsorms
         torch.manual_seed(seed) # needed for torchvision 0.7
         if self.img_transform is not None:
-            
+
             image = self.img_transform(image)
             
         random.seed(seed) # apply this seed to img tranfsorms
@@ -132,9 +132,13 @@ class test_dataset:
     def __init__(self, image_root, gt_root, testsize):
         self.testsize = testsize
         self.images = [image_root + f for f in os.listdir(image_root) if f.endswith('.jpg') or f.endswith('.png')]
-        self.gts = [gt_root + f for f in os.listdir(gt_root) if f.endswith('.tif') or f.endswith('.png') or f.endswith('.jpg')]
         self.images = sorted(self.images)
-        self.gts = sorted(self.gts)
+        self.gts = None 
+        if gt_root is not None : 
+            self.gts = [gt_root + f for f in os.listdir(gt_root) if f.endswith('.tif') or f.endswith('.png') or f.endswith('.jpg')]
+            self.gts = sorted(self.gts)
+        
+        
 
         self.transform = transforms.Compose([
             transforms.Resize((self.testsize, self.testsize)),
@@ -155,9 +159,17 @@ class test_dataset:
         torch.manual_seed(seed) 
 
         image = self.rgb_loader(self.images[self.index ])
+        gt = None 
+        gt_edge = None
+
+        if self.gts is not None:
+            gt = self.binary_loader(self.gts[self.index ])
+            gt_edge = self.binary_loader(self.gts[self.index ].replace("mask","edge_mask"))
+            gt = self.gt_transform(gt)
+            gt_edge = self.gt_transform(gt_edge)
         
-        gt = self.binary_loader(self.gts[self.index ])
-        gt_edge = self.binary_loader(self.gts[self.index ].replace("mask","edge_mask"))
+
+        image_size = np.array(image).shape
         
         image = self.transform(image).unsqueeze(0)
 
@@ -165,8 +177,6 @@ class test_dataset:
         random.seed(seed) # apply this seed to img tranfsorms
         torch.manual_seed(seed) # needed for torchvision 0.7
      
-        gt = self.gt_transform(gt)
-        gt_edge = self.gt_transform(gt_edge)
         
         name = self.images[self.index].split('/')[-1]
         
@@ -174,7 +184,7 @@ class test_dataset:
             name = name.split('.jpg')[0] + '.png'
         self.index += 1
 
-        return image, gt,gt_edge, name
+        return image, gt,gt_edge, name,image_size
 
     def rgb_loader(self, path):
         with open(path, 'rb') as f:

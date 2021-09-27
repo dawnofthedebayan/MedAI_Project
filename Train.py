@@ -3,7 +3,7 @@ from torch.autograd import Variable
 import os
 import argparse
 from datetime import datetime
-from lib.DRPAEdgeNet import DRPAEdgeNet,EdgeNet
+from lib.DPRAEdgeNet import DPRAEdgeNet,EdgeNet
 from lib.segnet import SegNet 
 from lib.pranet import PraNet
 
@@ -53,7 +53,7 @@ def test(model, path,model_name):
     val_loss=0.0
 
     for i in range(total_vals):
-        image, gt, gt_edge,name = test_loader.load_data()
+        image, gt, gt_edge,name,_ = test_loader.load_data()
 
         gt = gt.unsqueeze(0)
         gt_edge = gt_edge.unsqueeze(0)
@@ -70,7 +70,7 @@ def test(model, path,model_name):
 
             total_loss = loss + loss1 + loss2 + loss3 
 
-        elif opt.model == "DRPAEdgeNet" or opt.model == "EdgeNet":
+        elif opt.model == "DPRAEdgeNet" or opt.model == "EdgeNet":
 
             seg_map_array, edge_map_array = model(image)
             res = seg_map_array[0]
@@ -152,7 +152,7 @@ def train(train_loader, model, optimizer, scheduler,epoch, test_path,best_meandi
            
 
 
-            if opt.model == "DRPAEdgeNet" or opt.model == "EdgeNet" :
+            if opt.model == "DPRAEdgeNet" or opt.model == "EdgeNet" :
 
                 seg_map_array, edge_map_array = model(images)
                 
@@ -259,9 +259,9 @@ if __name__ == '__main__':
    
     parser.add_argument('--feature_channels', type=int,default=128)
 
-    parser.add_argument('--patience_early_stopping', type=int,default=5)
+    parser.add_argument('--patience_early_stopping', type=int,default=10)
 
-    parser.add_argument('--patience_scheduler', type=int,default=3)
+    parser.add_argument('--patience_scheduler', type=int,default=5)
 
     parser.add_argument('--model', type=str,default="Ours")
 
@@ -269,10 +269,10 @@ if __name__ == '__main__':
 
     # ---- build models ----
     
-    if opt.model == "DRPAEdgeNet": 
+    if opt.model == "DPRAEdgeNet": 
         
-        print("Choosing DRPAEdgeNet")
-        model = DRPAEdgeNet(opt.feature_channels).cuda()
+        print("Choosing DPRAEdgeNet")
+        model = DPRAEdgeNet(opt.feature_channels).cuda()
 
     elif opt.model == "EdgeNet": 
         
