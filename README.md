@@ -58,7 +58,7 @@ to combine features from the previous decoder blocks and reverse attention (RA) 
     
     + `conda create -n *your_env_name* python=3.6`.
     
-    + Install the dependables using : `pip install -r /path/to/requirements.txt`
+    + Install the dependencies using : `pip install -r /path/to/requirements.txt`
 
 - Downloading necessary data:
 
